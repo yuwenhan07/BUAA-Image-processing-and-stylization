@@ -7,9 +7,9 @@
 
 实现效果：
 <p align="center">
-    <img src="/style-images/van Gogh.jpg" height="200px">
-    <img src="/content-images/lenna.jpg" height="200px">
-    <img src="/output-images/lenna.jpg" height="200px">
+    <img src="images/style-images/van Gogh.jpg" height="200px">
+    <img src="images/content-images/lenna.jpg" height="200px">
+    <img src="images/output-images/lenna.jpg" height="200px">
 </p>
 
 ## 模型依赖
