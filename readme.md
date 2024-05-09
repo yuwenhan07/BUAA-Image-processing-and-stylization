@@ -7,9 +7,9 @@
 
 实现效果：
 <p align="center">
-    <img src="images/style-images/van Gogh.jpg" height="200px">
-    <img src="images/content-images/lenna.jpg" height="200px">
-    <img src="images/output-images/lenna.jpg" height="200px">
+    <img src="/style-images/van Gogh.jpg" height="200px">
+    <img src="/content-images/lenna.jpg" height="200px">
+    <img src="/output-images/lenna.jpg" height="200px">
 </p>
 
 ## 模型依赖
@@ -47,8 +47,11 @@ python neural_style/neural_style.py train --dataset </path/to/train-dataset> --s
 有关其他命令行参数，请参阅 `neural_style/neural_style.py` 。要训练新模型，可能需要调整 `--content-weight 1e5` 和 `--style-weight 1e10` 的值。已有的风格化模型是用 `--content-weight 1e5` 和 `--style-weight 1e10` 训练的。其余 3 个模型也使用相似的权重参数顺序进行训练， 但是`--style-weight`（`5e10` 或 `1e11` ） 略有变化。
 
 
+**一些保存的命令**
+```shell
  python neural_style/neural_style.py train --dataset train --style-image images/style_images/vangao.jpg --save-model-dir ~/new-model-saved --epochs 2 --cuda 1
 
  python neural_style/neural_style.py eval --content-image /home/yuwenhan/image_enhance/fast_neural_style/images/content_images/lenna.png --model /home/yuwenhan/image_enhance/fast_neural_style/new_saved_models/Monet.model --output-image /home/yuwenhan/image_enhance/fast_neural_style/images/output_images/lenna.jpg --cuda 0
 
  python neural_style/neural_style.py eval --content-image images/content_images/amber.jpg --model new_saved_models/Monet.model --output-image images/output_images/amber-monet.jpg --cuda 1
+ ``` 
