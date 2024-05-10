@@ -8,7 +8,7 @@
 实现效果：
 <p align="center">
     <img src="images/style_images/van Gogh.jpg" height="200px">
-    <img src="images/content_images/lenna.jpg" height="200px">
+    <img src="images/content_images/lenna.png" height="200px">
     <img src="images/output_images/lenna.jpg" height="200px">
 </p>
 
