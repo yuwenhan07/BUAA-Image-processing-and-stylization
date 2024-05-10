@@ -46,10 +46,14 @@ python neural_style/neural_style.py train --dataset </path/to/train-dataset> --s
 
 有关其他命令行参数，请参阅 `neural_style/neural_style.py` 。要训练新模型，可能需要调整 `--content-weight 1e5` 和 `--style-weight 1e10` 的值。已有的风格化模型是用 `--content-weight 1e5` 和 `--style-weight 1e10` 训练的。其余 3 个模型也使用相似的权重参数顺序进行训练， 但是`--style-weight`（`5e10` 或 `1e11` ） 略有变化。
 
+## 使用ipynb函数进行可视化输出
+在`neural_style`文件夹下我们新建了一个`neural_style_comments.ipynb`文件，可以实现直接通过函数调用完成风格化迁移与训练，不用使用命令行参数进行函数调用，能更加简单地进行函数调用。
+
+
 
 **一些保存的命令**
 ```shell
- python neural_style/neural_style.py train --dataset train --style-image images/style_images/vangao.jpg --save-model-dir ~/new-model-saved --epochs 2 --cuda 1
+ python neural_style/neural_style.py train --dataset train --style-image images/style_images/vangao.jpg --save-model-dir /new-model-saved --epochs 2 --cuda 1
 
  python neural_style/neural_style.py eval --content-image /home/yuwenhan/image_enhance/fast_neural_style/images/content_images/lenna.png --model /home/yuwenhan/image_enhance/fast_neural_style/new_saved_models/Monet.model --output-image /home/yuwenhan/image_enhance/fast_neural_style/images/output_images/lenna.jpg --cuda 0
 
