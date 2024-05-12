@@ -53,7 +53,7 @@ python neural_style/neural_style.py train --dataset </path/to/train-dataset> --s
 
 **一些保存的命令**
 ```shell
- python neural_style/neural_style.py train --dataset train --style-image images/style_images/vangao.jpg --save-model-dir /new-model-saved --epochs 2 --cuda 1
+ python neural_style/neural_style.py train --dataset ../train --style-image images/style_images/vanGogh.jpg --save-model-dir new_model_saved --epochs 3 --cuda 1
 
  python neural_style/neural_style.py eval --content-image /home/yuwenhan/image_enhance/fast_neural_style/images/content_images/lenna.png --model /home/yuwenhan/image_enhance/fast_neural_style/new_saved_models/Monet.model --output-image /home/yuwenhan/image_enhance/fast_neural_style/images/output_images/lenna.jpg --cuda 0
 
