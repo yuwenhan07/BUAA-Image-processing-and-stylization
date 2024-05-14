@@ -190,7 +190,7 @@ def main():
     train_arg_parser = subparsers.add_parser("train", help="parser for training arguments")
     train_arg_parser.add_argument("--epochs", type=int, default=2,
                                   help="number of training epochs, default is 2")
-    train_arg_parser.add_argument("--batch-size", type=int, default=6,   # 修改
+    train_arg_parser.add_argument("--batch-size", type=int, default=8,   # 修改
                                   help="batch size for training, default is 4")
     train_arg_parser.add_argument("--dataset", type=str, required=True,
                                   help="path to training dataset, the path should point to a folder "
@@ -201,7 +201,7 @@ def main():
                                   help="path to folder where trained model will be saved.")
     train_arg_parser.add_argument("--checkpoint-model-dir", type=str, default=None,
                                   help="path to folder where checkpoints of trained models will be saved")
-    train_arg_parser.add_argument("--image-size", type=int, default=256,          # 修改
+    train_arg_parser.add_argument("--image-size", type=int, default=512,          # 修改
                                   help="size of training images, default is 256 X 256")
     train_arg_parser.add_argument("--style-size", type=int, default=None,
                                   help="size of style-image, default is the original size of style image")
