@@ -14,7 +14,7 @@
 
 ## 模型依赖
 该程序是用 Python 编写的，主要依赖pytorch库，请保证本地运行环境可以正常运行pytorch。
-GPU 不是必需的，但可以显着提高速度。如果你只是使用已训练好的模型权重进行测试，可以不适用GPU，但是在训练新模型时，我们建议你能有一个性能优秀的GPU来提高训练速度。
+GPU 不是必需的，但可以显着提高速度。如果你只是使用已训练好的模型权重进行测试，可以不使用GPU，但是在训练新模型时，我们建议你能有一个性能优秀的GPU来提高训练速度。
 该项目可以使用保存的模型在笔记本电脑或台式机上设置任意尺寸的图像样式。
 
 ## 用法
@@ -53,7 +53,7 @@ python neural_style/neural_style.py train --dataset </path/to/train-dataset> --s
 
 **一些保存的命令**
 ```shell
- python neural_style/neural_style_copy.py train --batch-size 6 --dataset ../train --style-image images/style_images/vanGogh.jpg --save-model-dir new_saved_model --epochs 2 --cuda 3
+ python neural_style/neural_style_copy.py train --batch-size 6 --dataset ../train --style-image images/style_images/cartoon.png --save-model-dir new_saved_model --epochs 2 --cuda 1
 
  python neural_style/neural_style.py eval --content-image /home/yuwenhan/image_enhance/fast_neural_style/images/content_images/lenna.png --model /home/yuwenhan/image_enhance/fast_neural_style/new_saved_models/Monet.model --output-image /home/yuwenhan/image_enhance/fast_neural_style/images/output_images/lenna.jpg --cuda 0
 

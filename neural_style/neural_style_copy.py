@@ -30,7 +30,7 @@ def check_paths(args):
 
 def train(args):
     if args.cuda:
-        device = torch.device("cuda")
+        device = torch.device("cuda:2")
     elif args.mps:
         device = torch.device("mps")
     else:
@@ -209,7 +209,7 @@ def main():
                                   help="set it to 1 for running on GPU, 0 for CPU")
     train_arg_parser.add_argument("--seed", type=int, default=42,
                                   help="random seed for training")
-    train_arg_parser.add_argument("--content-weight", type=float, default=1e4,  # 修改
+    train_arg_parser.add_argument("--content-weight", type=float, default=1e5,  # 修改
                                   help="weight for content-loss, default is 1e5")
     train_arg_parser.add_argument("--style-weight", type=float, default=1e11,  # 修改
                                   help="weight for style-loss, default is 1e10")
