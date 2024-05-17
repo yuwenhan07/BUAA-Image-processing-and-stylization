@@ -25,14 +25,14 @@ def pca_whitening(image):
     cov = np.cov(X_centered, rowvar=False)
 
     # 计算协方差矩阵的特征值和特征向量
-    U, S, Vt = np.linalg.svd(cov)
+    U, S, Ut = np.linalg.svd(cov)
 
     # 计算白化矩阵
     epsilon = 1e-5  # 防止除以零
     D = np.diag(1.0 / np.sqrt(S + epsilon))
 
     # 白化变换
-    X_whitened = X_centered.dot(U).dot(D).dot(U.T)
+    X_whitened = X_centered.dot(U).dot(D)
 
     # 将白化后的数据重塑回原始图像的形状
     return normalize_image(X_whitened.reshape(original_shape))
@@ -54,8 +54,11 @@ def zca_whitening(image):
     epsilon = 1e-5  # 防止除以零
     D = np.diag(1.0 / np.sqrt(S + epsilon))
 
+    # 白化变换
+    X_whitened = X_centered.dot(U).dot(D)
+    
     # ZCA白化变换
-    X_zca_whitened = X_centered.dot(U).dot(D).dot(Vt)  # Use Vt for rotation back to original space
+    X_zca_whitened = X_whitened.dot(U.T)
 
     # 将白化后的数据重塑回原始图像的形状
     return normalize_image(X_zca_whitened.reshape(original_shape))
