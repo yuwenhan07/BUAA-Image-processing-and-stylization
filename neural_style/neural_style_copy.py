@@ -30,7 +30,7 @@ def check_paths(args):
 
 def train(args):
     if args.cuda:
-        device = torch.device("cuda:2")
+        device = torch.device("cuda:1")
     elif args.mps:
         device = torch.device("mps")
     else:
