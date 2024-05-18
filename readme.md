@@ -1,11 +1,11 @@
 # fast_neural_style 快速神经网络实现图像风格化
 ---
 ## 概述
-该存储库包含用于**艺术风格转移的算法**的 pytorch 实现。该算法可用于将**图像的内容与另一图像的样式混合**。实现图像风格化迁移。
-该模型使用实时风格传输和超分辨率的感知损失以及实例归一化中所述的方法。
-**Perceptual Losses for Real-Time Style Transfer and Super-Resolution**  论文地址：https://arxiv.org/abs/1603.08155
+该存储库包含用于**艺术风格转移的算法**的 PyTorch 实现。该算法可用于将**图像的内容与另一图像的样式混合**，实现图像风格化迁移。模型使用实时风格传输和超分辨率的感知损失以及实例归一化中所述的方法。
 
-实现效果：
+论文参考：**Perceptual Losses for Real-Time Style Transfer and Super-Resolution** [论文链接](https://arxiv.org/abs/1603.08155)
+
+实现效果展示：
 <p align="center">
     <img src="images/style_images/sketch.jpg" height="200px">
     <img src="images/content_images/lenna.png" height="200px">
@@ -13,50 +13,53 @@
 </p>
 
 ## 模型依赖
-该程序是用 Python 编写的，主要依赖pytorch库，请保证本地运行环境可以正常运行pytorch。
-GPU 不是必需的，但可以显着提高速度。如果你只是使用已训练好的模型权重进行测试，可以不使用GPU，但是在训练新模型时，我们建议你能有一个性能优秀的GPU来提高训练速度。
-该项目可以使用保存的模型在笔记本电脑或台式机上设置任意尺寸的图像样式。
+该程序使用 Python 编写，主要依赖 PyTorch 库，请确保本地运行环境可以正常运行 PyTorch。GPU 虽然不是必需的，但可以显著提高速度。如果您只使用已训练好的模型权重进行测试，可以不使用 GPU，但在训练新模型时，建议使用高性能 GPU 以提高训练速度。
 
 ## 用法
-注意：
-* 在这个项目中，我们已经为您保存好一些训练好的权重数据，可以参见 ```/saved_models```这个文件夹。
-* 我们使用的训练数据是coco2014train作为训练数据集，由于coco是一个完全数据集，所以需要将下载的内容放在一个文件夹下，如`train/train2024`下
+### 注意事项
+- 项目中已提供一些训练好的模型权重，存放在 `saved_models` 文件夹中。
+- 我们使用 COCO 2014 训练数据集，下载后将数据放在一个文件夹下，例如 `train/train2014`。
 
-**风格化图像**
+### 风格化图像
 ```shell
 python neural_style/neural_style.py eval --content-image </path/to/content/image> --model </path/to/saved/model> --output-image </path/to/output/image> --cuda 0
 ```
-- `--content-image`: 要样式化的内容图像的路径。
-- `--model`: 保存的模型，用于样式化图像
-- `--output-image`: 用于保存输出图像的路径
-- `--content-scale`:如果内存不足，则用于缩小内容图像的系数（例如：值为 2 将使内容图像的高度和宽度减半）
-- `--cuda`: 设置为 1 以在 GPU 上运行，设置为 0 以 CPU 运行。
-- `--mps`: 将其设置为 1 以在 macOS GPU 上运行
+参数说明：
+- `--content-image`: 要风格化的内容图像的路径。
+- `--model`: 已保存的模型，用于风格化图像。
+- `--output-image`: 保存输出图像的路径。
+- `--content-scale`: 若内存不足，用于缩小内容图像的系数（如：值为 2 将使内容图像的高度和宽度减半）。
+- `--cuda`: 设置为 1 在 GPU 上运行，设置为 0 在 CPU 上运行。
+- `--mps`: 设置为 1 在 macOS GPU 上运行。
 
-**训练模型**
+### 训练模型
 ```shell
 python neural_style/neural_style.py train --dataset </path/to/train-dataset> --style-image </path/to/style/image> --save-model-dir </path/to/save-model/folder> --epochs 2 --cuda 1
 ```
-有几个命令行参数，下面列出了重要的参数
-* --dataset ：训练数据集的路径，则该路径应指向包含包含所有训练图像的另一个文件夹的文件夹。我使用了 COCO 2014 训练图像数据集。
-* --style-image ：样式图像的路径。
-* --save-model-dir ：将保存训练模型的文件夹的路径。
-* --cuda ：设置为 1 以在 GPU 上运行，设置为 0 以 CPU 运行。
-* --mps ：将其设置为 1 以在 macOS GPU 上运行
+重要参数说明：
+- `--dataset`: 训练数据集的路径，应指向包含所有训练图像的文件夹。
+- `--style-image`: 样式图像的路径。
+- `--save-model-dir`: 保存训练模型的文件夹路径。
+- `--cuda`: 设置为 1 在 GPU 上运行，设置为 0 在 CPU 上运行。
+- `--mps`: 设置为 1 在 macOS GPU 上运行。
 
-有关其他命令行参数，请参阅 `neural_style/neural_style.py` 。要训练新模型，可能需要调整 `--content-weight 1e5` 和 `--style-weight 1e10` 的值。已有的风格化模型是用 `--content-weight 1e5` 和 `--style-weight 1e10` 训练的。其余 3 个模型也使用相似的权重参数顺序进行训练， 但是`--style-weight`（`5e10` 或 `1e11` ） 略有变化。
+更多命令行参数请参阅 `neural_style/neural_style.py`。训练新模型时，可能需要调整 `--content-weight 1e5` 和 `--style-weight 1e10` 的值。现有的风格化模型是用 `--content-weight 1e5` 和 `--style-weight 1e10` 训练的。其他三个模型使用相似的权重参数顺序进行训练，但 `--style-weight`（`5e10` 或 `1e11`）略有变化。
 
-## 使用ipynb函数进行可视化输出
-在`neural_style`文件夹下我们新建了一个`neural_style_comments.ipynb`文件，可以实现直接通过函数调用完成风格化迁移与训练，不用使用命令行参数进行函数调用，能更加简单地进行函数调用。
+## 使用 ipynb 文件进行可视化输出
+在 `neural_style` 文件夹下有一个 `neural_style_comments.ipynb` 文件，可以直接通过函数调用完成风格化迁移与训练，而不需要使用命令行参数，更加方便。
 
-## web-demo
-对于已经训练好的模型，我们也做了一个简单的网页端部署，可以在`web-demo`文件夹下查看，到达该文件夹后，使用命令```python app.py```，然后在本地的浏览器中打开。
-
-**一些保存的命令**
+## Web Demo
+对于已训练好的模型，我们提供了一个简单的网页端部署。可以在 `web-demo` 文件夹下查看，进入该文件夹后使用以下命令：
 ```shell
- python neural_style/neural_style_copy.py train --batch-size 6 --dataset ../train --style-image images/style_images/sketch.jpg --save-model-dir new_saved_model --epochs 2 --cuda 1
+python app.py
+```
+然后在本地浏览器中打开网页。
 
- python neural_style/neural_style.py eval --content-image /home/yuwenhan/image_enhance/fast_neural_style/images/content_images/lenna.png --model /home/yuwenhan/image_enhance/fast_neural_style/new_saved_models/Monet.model --output-image /home/yuwenhan/image_enhance/fast_neural_style/images/output_images/lenna.jpg --cuda 0
+### 一些保存的命令示例
+```shell
+python neural_style/neural_style_copy.py train --batch-size 6 --dataset ../train --style-image images/style_images/sketch.jpg --save-model-dir new_saved_model --epochs 2 --cuda 1
 
- python neural_style/neural_style.py eval --content-image images/content_images/amber.jpg --model new_saved_models/Monet.model --output-image images/output_images/amber-monet.jpg --cuda 1
- ``` 
+python neural_style/neural_style.py eval --content-image /home/yuwenhan/image_enhance/fast_neural_style/images/content_images/lenna.png --model /home/yuwenhan/image_enhance/fast_neural_style/new_saved_models/Monet.model --output-image /home/yuwenhan/image_enhance/fast_neural_style/images/output_images/lenna.jpg --cuda 0
+
+python neural_style/neural_style.py eval --content-image images/content_images/amber.jpg --model new_saved_models/Monet.model --output-image images/output_images/amber-monet.jpg --cuda 1
+```
