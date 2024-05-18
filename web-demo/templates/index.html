@@ -1,0 +1,112 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Image Stylization</title>
+     <style>
+         body {
+             font-family: Arial, sans-serif;
+             background-color: #f4f4f9;
+             margin: 0;
+             padding: 0;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+         }
+         .container {
+             background: #ebebe6;
+             padding: 2rem;
+             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+             border-radius: 8px;
+             text-align: center;
+             max-width: 800px;
+         }
+         h1 {
+             margin-bottom: 1.5rem;
+             color: #333;
+         }
+         form {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+         }
+         label {
+             margin-bottom: 0.5rem;
+             color: #555;
+         }
+         input[type="file"],
+         select,
+         input[type="submit"] {
+             margin-bottom: 1rem;
+             padding: 0.5rem;
+             border: 1px solid #ddd;
+             border-radius: 4px;
+             font-size: 1rem;
+             width: 100%;
+             max-width: 300px;
+         }
+         input[type="submit"] {
+             background-color: #5cb5b8;
+             color: white;
+             cursor: pointer;
+             transition: background-color 0.3s ease;
+         }
+         input[type="submit"]:hover {
+             background-color: #4c97ae;
+         }
+         .images {
+             display: flex;
+             justify-content: space-around;
+             margin-top: 1rem;
+         }
+         .images img {
+             max-width: 45%;
+             border-radius: 8px;
+         }
+     </style>
+     <script>
+         function previewImage(event, id) {
+             var reader = new FileReader();
+             reader.onload = function(){
+                 var output = document.getElementById(id);
+                 output.src = reader.result;
+                 output.style.display = 'block';
+             }
+             reader.readAsDataURL(event.target.files[0]);
+         }
+     </script>
+ </head>
+ <body>
+     <div class="container">
+         <h1>上传一张需要风格化的文件</h1>
+         <form action="/upload" method="post" enctype="multipart/form-data">
+             <label for="content_image">选择一张原始图像:</label>
+             <input type="file" name="content_image" id="content_image" onchange="previewImage(event, 'originalImage')" required>
+             <label for="model">选择风格化的模型:</label>
+             <select name="model" id="model">
+                 <option value="cartoon-final.model">卡通漫画风格</option>
+                 <option value="vangogh-final.model">梵高星空风格</option>
+                 <option value="monet-final.model">莫奈睡莲风格</option>
+                 <option value="sketch-final.model">素描简笔风格</option>
+                 <option value="candy.pth">糖果风格</option>
+                 <option value="mosaic.pth">马赛克风格</option>
+                 <option value="rain_princess.pth">下雨公主风格</option>
+                 <option value="udnie.pth">抽象派风格</option>
+             </select>
+             <input type="submit" value="提交">
+         </form>
+         <div class="images">
+             <img id="originalImage" style="display:none;" alt="Original Image">
+             {% if original_image %}
+             <img src="{{ original_image }}" alt="Original Image">
+             {% endif %}
+             {% if stylized_image %}
+             <img src="{{ stylized_image }}" alt="Stylized Image">
+             {% endif %}
+         </div>
+     </div>
+ </body>
+ </html>
+ 
