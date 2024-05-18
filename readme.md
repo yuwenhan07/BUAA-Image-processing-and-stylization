@@ -22,15 +22,6 @@
 pip install -r requirements.txt
 ```
 
-`requirements.txt` 文件内容如下：
-
-```
-torch>=1.8.1
-torchvision>=0.9.1
-numpy>=1.21.0
-Pillow>=8.2.0
-```
-
 ## 用法
 ### 注意事项
 - 项目中已提供一些训练好的模型权重，存放在 `new_saved_model` 文件夹中。
