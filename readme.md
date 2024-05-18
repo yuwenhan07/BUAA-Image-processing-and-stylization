@@ -7,9 +7,9 @@
 
 实现效果：
 <p align="center">
-    <img src="images/style_images/vanGogh.jpg" height="200px">
+    <img src="images/style_images/sketch.jpg" height="200px">
     <img src="images/content_images/lenna.png" height="200px">
-    <img src="images/output_images/lenna.jpg" height="200px">
+    <img src="images/output_images/sketch-final.jpg" height="200px">
 </p>
 
 ## 模型依赖
@@ -49,7 +49,8 @@ python neural_style/neural_style.py train --dataset </path/to/train-dataset> --s
 ## 使用ipynb函数进行可视化输出
 在`neural_style`文件夹下我们新建了一个`neural_style_comments.ipynb`文件，可以实现直接通过函数调用完成风格化迁移与训练，不用使用命令行参数进行函数调用，能更加简单地进行函数调用。
 
-
+## web-demo
+对于已经训练好的模型，我们也做了一个简单的网页端部署，可以在`web-demo`文件夹下查看，到达该文件夹后，使用命令```python app.py```，然后在本地的浏览器中打开。
 
 **一些保存的命令**
 ```shell
