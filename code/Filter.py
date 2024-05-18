@@ -30,7 +30,8 @@ def gaussian_filter(image, filter_size, sigma): # 参数：图像对应矩阵，
             for m in range(-filter_size // 2, filter_size // 2 + 1):
                 for n in range(-filter_size // 2, filter_size // 2 + 1):
                     if 0 <= i + m < height and 0 <= j + n < width:
-                        window[m + filter_size // 2][n + filter_size // 2] = image[i + m, j + n] * kernel[m + filter_size // 2][n + filter_size // 2]
+                        window[m + filter_size // 2][n + filter_size // 2] = \
+                        image[i + m, j + n] * kernel[m + filter_size // 2][n + filter_size // 2]
             
             filtered_value = np.sum(window)
             filtered_image[i, j] = np.uint8(filtered_value)
