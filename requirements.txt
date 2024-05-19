@@ -1,6 +1,6 @@
-Flask==3.0.3
+torch==2.3.0
+torchvision==0.18.0
 numpy==1.26.4
 onnxruntime==1.17.3
 Pillow==10.3.0
-torch==2.3.0+cu118
-torchvision==0.18.0+cu118
+Flask==3.0.3
